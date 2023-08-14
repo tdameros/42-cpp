@@ -5,21 +5,21 @@
 
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(void): Form("ShrubberyCreationForm",
-														 "Undefined",
-														 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(void): AForm("ShrubberyCreationForm",
+														  "Undefined",
+														  145, 137)
 {
 
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target):
-											 Form("ShrubberyCreationForm",
-												  target, 145, 137)
+		AForm("ShrubberyCreationForm",
+			  target, 145, 137)
 {
 
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other): Form(other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other): AForm(other)
 {
 
 }

@@ -7,17 +7,17 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 public:
-	Form(void);
-	Form(const std::string name, const std::string target,
-		 const unsigned int requiredGradeToSign,
-		 const unsigned int requiredGradeToExecute);
-	Form(const Form &other);
-	virtual ~Form(void);
+	AForm(void);
+	AForm(const std::string name, const std::string target,
+		  const unsigned int requiredGradeToSign,
+		  const unsigned int requiredGradeToExecute);
+	AForm(const AForm &other);
+	virtual ~AForm(void);
 
-	Form&	operator=(const Form& other);
+	AForm&	operator=(const AForm& other);
 
 	virtual void	execute(const Bureaucrat& executor) const = 0;
 	void			beExecute(const Bureaucrat& executor) const;
@@ -55,6 +55,6 @@ private:
 	const unsigned int	_requiredGradeToExecute;
 };
 
-std::ostream&	operator<<(std::ostream& os, const Form& form);
+std::ostream&	operator<<(std::ostream& os, const AForm& form);
 
 #endif

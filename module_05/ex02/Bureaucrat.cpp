@@ -52,7 +52,7 @@ void	Bureaucrat::decrementGrade(void)
 		this->_grade++;
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	if (form.getIsSigned())
 	{
@@ -68,7 +68,7 @@ void Bureaucrat::signForm(Form &form)
 			std::cout << this->getName() << " signed " << form.getName()
 					  << std::endl;
 		}
-		catch (Form::GradeTooLowException& e)
+		catch (AForm::GradeTooLowException& e)
 		{
 			std::cout << this->getName() << " couldn’t sign "
 					  << form.getName() << " because its grade is too low."
@@ -77,20 +77,20 @@ void Bureaucrat::signForm(Form &form)
 	}
 }
 
-void	Bureaucrat::executeForm(const Form& form) const
+void	Bureaucrat::executeForm(const AForm& form) const
 {
 	try
 	{
 		form.execute(*this);
 		std::cout << this->getName() << " executed " << form.getName() << std::endl;
 	}
-	catch (Form::UnsignedFormException& e)
+	catch (AForm::UnsignedFormException& e)
 	{
 		std::cout << this->getName() << " couldn’t execute "
 				  << form.getName() << " because the form is unsigned."
 				  << std::endl;
 	}
-	catch (Form::GradeTooLowException& e)
+	catch (AForm::GradeTooLowException& e)
 	{
 		std::cout << this->getName() << " couldn’t execute "
 				  << form.getName() << " because its grade is too low."

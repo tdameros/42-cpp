@@ -2,21 +2,21 @@
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(void): Form("PresidentialPardonForm",
-														 "Undefined",
-														 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(void): AForm("PresidentialPardonForm",
+															"Undefined",
+															25, 5)
 {
 
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string target):
-											 Form("PresidentialPardonForm",
-												  target, 25, 5)
+		AForm("PresidentialPardonForm",
+			  target, 25, 5)
 {
 
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other): Form(other)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other): AForm(other)
 {
 
 }

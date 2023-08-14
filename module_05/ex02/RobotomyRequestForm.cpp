@@ -4,20 +4,20 @@
 
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(void): Form("RobotomyRequestForm",
-													 "Undefined", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(void): AForm("RobotomyRequestForm",
+													  "Undefined", 72, 45)
 {
 
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target):
-											 Form("RobotomyRequestForm",
-												  target, 72, 45)
+		AForm("RobotomyRequestForm",
+			  target, 72, 45)
 {
 
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other): Form(other)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other): AForm(other)
 {
 
 }

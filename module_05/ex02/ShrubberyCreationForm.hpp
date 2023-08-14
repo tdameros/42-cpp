@@ -3,7 +3,7 @@
 
 # include "AForm.hpp"
 
-class ShrubberyCreationForm: public Form
+class ShrubberyCreationForm: public AForm
 {
 public:
 	ShrubberyCreationForm(void);

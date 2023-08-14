@@ -6,7 +6,7 @@
 
 # include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -20,8 +20,8 @@ public:
 
 	void		incrementGrade(void);
 	void		decrementGrade(void);
-	void		signForm(Form& form);
-	void		executeForm(const Form& form) const;
+	void		signForm(AForm& form);
+	void		executeForm(const AForm& form) const;
 
 	std::string		getName(void) const;
 	unsigned int	getGrade(void) const;

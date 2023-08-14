@@ -3,7 +3,7 @@
 
 # include "AForm.hpp"
 
-class RobotomyRequestForm: public Form
+class RobotomyRequestForm: public AForm
 {
 public:
 	RobotomyRequestForm(void);
