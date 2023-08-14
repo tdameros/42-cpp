@@ -1,15 +1,17 @@
 #include <iostream>
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form(void): _name("Undefined"), _isSigned(false),
+Form::Form(void): _name("Undefined"), _target("Undefined"), _isSigned(false),
 				  _requiredGradeToSign(150), _requiredGradeToExecute(150)
 {
 
 }
 
-Form::Form(const std::string name, const unsigned int requiredGradeToSign,
-		   const unsigned int requiredGradeToExecute): _name(name),
+Form::Form(const std::string name, const std::string target,
+		   const unsigned int requiredGradeToSign,
+		   const unsigned int requiredGradeToExecute):
+		   _name(name), _target(target),
 		   _isSigned(false), _requiredGradeToSign(requiredGradeToSign),
 		   _requiredGradeToExecute(requiredGradeToExecute)
 {
@@ -19,7 +21,7 @@ Form::Form(const std::string name, const unsigned int requiredGradeToSign,
 		throw GradeTooLowException();
 }
 
-Form::Form(const Form &other): _name(other._name),
+Form::Form(const Form &other): _name(other._name), _target(other._target),
 							   _requiredGradeToSign(other._requiredGradeToSign),
 							   _requiredGradeToExecute(other._requiredGradeToExecute)
 {
@@ -40,16 +42,29 @@ Form&	Form::operator=(const Form &other)
 	return (*this);
 }
 
-void Form::beSigned(const Bureaucrat& bureaucrat)
+void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (bureaucrat.getGrade() > this->getRequiredGradeToSign())
 		throw GradeTooLowException();
 	this->_isSigned = true;
 }
 
-std::string Form::getName(void) const
+void	Form::beExecute(const Bureaucrat& executor) const
+{
+	if (!this->getIsSigned())
+		throw UnsignedFormException();
+	if (executor.getGrade() > this->getRequiredGradeToExecute())
+		throw GradeTooLowException();
+}
+
+std::string	Form::getName(void) const
 {
 	return (this->_name);
+}
+
+std::string Form::getTarget(void) const
+{
+	return (this->_target);
 }
 
 bool Form::getIsSigned(void) const
@@ -77,6 +92,11 @@ const char*	Form::GradeTooLowException::what() const throw()
 	return ("Grade is too low, it should be between 1 and 150 (inclusive)");
 }
 
+const char*	Form::UnsignedFormException::what() const throw()
+{
+	return ("The form is not signed");
+}
+
 std::ostream&	operator<<(std::ostream& os, const Form& form)
 {
 	if (form.getIsSigned())
@@ -84,6 +104,7 @@ std::ostream&	operator<<(std::ostream& os, const Form& form)
 	else
 		os << form.getName() << " form is not signed";
 	os << "\n(required grade to sign: " << form.getRequiredGradeToSign() << ")"
-	<< "\n(required grade to execute: " << form.getRequiredGradeToExecute() << ")";
+	<< "\n(required grade to execute: " << form.getRequiredGradeToExecute()
+	<< ", target: " << form.getTarget() << ")";
 	return (os);
 }
