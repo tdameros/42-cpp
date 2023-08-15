@@ -12,6 +12,7 @@ Cat::Cat(): AAnimal("Cat")
 Cat::Cat(const Cat& other): AAnimal(other)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	this->_brain = NULL;
 	*this = other;
 }
 

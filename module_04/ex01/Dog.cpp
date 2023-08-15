@@ -11,6 +11,7 @@ Dog::Dog(): Animal("Dog")
 Dog::Dog(const Dog& other): Animal(other)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
+	this->_brain = NULL;
 	*this = other;
 }
 
