@@ -12,6 +12,7 @@ Cat::Cat(): Animal("Cat")
 Cat::Cat(const Cat& other): Animal(other)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
+	this->_brain = NULL;
 	*this = other;
 }
 
