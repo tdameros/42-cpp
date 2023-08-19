@@ -4,30 +4,36 @@
 #include "ClapTrap.hpp"
 
 DiamondTrap::DiamondTrap(void): ClapTrap(),
-								FragTrap(),
 								ScavTrap(),
+								FragTrap(),
 								_name("Unnamed")
 {
+	ScavTrap	scav;
+
 	std::cout << "DiamondTrap default constructor called" << std::endl;
 	ClapTrap::_name = this->_name + "_clap_name";
 	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
+	this->_energyPoints = scav.getEnergyPoints();
 	std::cout << FragTrap::_attackDamage << std::endl;
 	this->_attackDamage = FragTrap::_attackDamage;
 }
 
 DiamondTrap::DiamondTrap(const std::string name): ClapTrap(name + "_clap_name"),
-												  FragTrap(name),
-												  ScavTrap(name),
+												  ScavTrap(),
+												  FragTrap(),
 												  _name(name)
 {
+	ScavTrap	scav;
+
 	std::cout << "DiamondTrap string constructor called" << std::endl;
 	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
+	this->_energyPoints = scav.getEnergyPoints();
 	this->_attackDamage = FragTrap::_attackDamage;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other), FragTrap(other), ScavTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other),
+													ScavTrap(other),
+													FragTrap(other)
 {
 	std::cout << "DiamondTrap copy constructor called" << std::endl;
 	*this = other;
