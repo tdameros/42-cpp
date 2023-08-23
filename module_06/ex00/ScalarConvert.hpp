@@ -12,11 +12,18 @@ public:
 
 	ScalarConvert	&operator=(const ScalarConvert& other);
 
-	static void	convert(std::string& literal);
+	static void	convert(const std::string& literal);
 
 private:
-	static void	_printCharConversion(double conversion);
-	bool		_isInf()
+	static void	_printCharConversion(const double conversion, bool isPossible);
+	static void	_printIntConversion(const double conversion, bool isPossible);
+	static void	_printFloatConversion(const double conversion,
+										 bool isPossible);
+	static void	_printDoubleConversion(const double conversion,
+										  bool isPossible);
+
+	static bool		_isInf(const double number);
+	static bool		_isInff(const float number);
 };
 
 
