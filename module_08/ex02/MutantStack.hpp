@@ -1,5 +1,5 @@
-#ifndef SPAN_HPP
-# define SPAN_HPP
+#ifndef MUTTANTSTACK_HPP
+# define MUTTANTSTACK_HPP
 
 # include <stack>
 # include <deque>
