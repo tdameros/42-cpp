@@ -31,6 +31,7 @@ int	main(void)
 	identify(NULL);
 	identify(test);
 	identify(*test);
+	delete test;
 	return (0);
 }
 
