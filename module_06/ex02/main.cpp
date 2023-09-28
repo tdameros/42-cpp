@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
-#include <typeinfo>
+#include <stdexcept>
 #include <ctime>
 #include <cstdlib>
 
@@ -71,20 +71,20 @@ void	identify(Base& p)
 		std::cout << "A pointer" << std::endl;
 		return;
 	}
-	catch (const std::bad_cast& e) {}
+	catch (const std::exception& e) {}
 	try
 	{
 		static_cast<void>(dynamic_cast<B&>(p));
 		std::cout << "B pointer" << std::endl;
 		return;
 	}
-	catch (const std::bad_cast& e) {}
+	catch (const std::exception& e) {}
 	try
 	{
 		static_cast<void>(dynamic_cast<C&>(p));
 		std::cout << "C pointer" << std::endl;
 		return;
 	}
-	catch (const std::bad_cast& e) {}
+	catch (const std::exception& e) {}
 	std::cout << "Unknow pointer" << std::endl;
 }
