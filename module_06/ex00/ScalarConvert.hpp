@@ -5,16 +5,18 @@
 
 class ScalarConvert
 {
+
 public:
+	static void	convert(const std::string& literal);
+
+private:
 	ScalarConvert(void);
 	ScalarConvert(const ScalarConvert& other);
 	~ScalarConvert(void);
 
 	ScalarConvert	&operator=(const ScalarConvert& other);
 
-	static void	convert(const std::string& literal);
 
-private:
 	static void	_printCharConversion(const double conversion, bool isPossible);
 	static void	_printIntConversion(const double conversion, bool isPossible);
 	static void	_printFloatConversion(const double conversion,
