@@ -16,14 +16,19 @@ public:
 		for (unsigned int i = 0; i < n; i++)
 			_data[i] = T();
 	}
-	Array(const Array& other) { *this = other; }
+	Array(const Array& other)
+	{
+		_data = NULL;
+		*this = other;
+	}
 	~Array(void) { delete[] _data; }
 
 	Array&	operator=(const Array& other)
 	{
 		if (this != &other)
 		{
-			delete[] _data;
+			if (_data != NULL)
+				delete[] _data;
 			_size = other._size;
 			_data = new T[other._size];
 			for (unsigned int i = 0; i < other._size; i++)
