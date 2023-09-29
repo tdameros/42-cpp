@@ -19,8 +19,10 @@ public:
 		return (*this);
 	};
 
-	typedef typename std::deque<T>::iterator			iterator;
-	typedef typename std::deque<T>::reverse_iterator 	reverse_iterator;
+	typedef typename std::deque<T>::iterator				iterator;
+	typedef typename std::deque<T>::reverse_iterator 		reverse_iterator;
+	typedef typename std::deque<T>::const_iterator			const_iterator;
+	typedef typename std::deque<T>::const_reverse_iterator	const_reverse_iterator;
 
 	iterator	begin(void)
 	{
@@ -37,6 +39,26 @@ public:
 	}
 
 	reverse_iterator	rend(void)
+	{
+		return (this->c.rend());
+	}
+
+	const_iterator	cbegin(void)
+	{
+		return (this->c.begin());
+	}
+
+	const_iterator	cend(void)
+	{
+		return (this->c.end());
+	}
+
+	const_reverse_iterator	crbegin(void)
+	{
+		return (this->c.rbegin());
+	}
+
+	const_reverse_iterator	crend(void)
 	{
 		return (this->c.rend());
 	}

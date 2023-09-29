@@ -26,13 +26,14 @@ int main()
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
 	MutantStack<int>::reverse_iterator rit = mstack.rbegin();
-	MutantStack<int>::reverse_iterator rite = mstack.cend();
+	static_cast<void>(rit);
+	MutantStack<int>::reverse_iterator rite = mstack.rend();
+	static_cast<void>(rite);
 	++it;
 	--it;
 	while (it != ite) {
 		std::cout << *it << std::endl;
 		++it; }
 	std::stack<int> s(mstack);
-
 	return (0);
 }
