@@ -11,6 +11,7 @@ int	main(int argc, char *argv[])
 		std::cout << "Invalid argument: ./btc input.txt" << std::endl;
 		return (EXIT_FAILURE);
 	}
-	BitcoinExchange	binance = BitcoinExchange(std::string(argv[1]));
+	BitcoinExchange	binance = BitcoinExchange("data.csv");
+	binance.convert(std::string(argv[1]));
 	return (EXIT_SUCCESS);
 }
