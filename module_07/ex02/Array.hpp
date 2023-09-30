@@ -13,8 +13,6 @@ public:
 	{
 		_data = new T[n];
 		_size = n;
-		for (unsigned int i = 0; i < n; i++)
-			_data[i] = T();
 	}
 	Array(const Array& other)
 	{
