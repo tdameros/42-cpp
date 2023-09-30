@@ -29,8 +29,6 @@ public:
 				delete[] _data;
 			_size = other._size;
 			_data = new T[other._size];
-			for (unsigned int i = 0; i < other._size; i++)
-				_data[i] = other._data[i];
 		}
 		return (*this);
 	}
