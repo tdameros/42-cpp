@@ -16,7 +16,7 @@ int	main(int argc, char *argv[])
 		RPN	calculator = RPN();
 		std::cout << calculator.calculate(std::string(argv[1])) << std::endl;
 	}
-	catch (RPN::ExpressionException& e)
+	catch (std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
 		return (EXIT_FAILURE);
