@@ -42,10 +42,16 @@ void	Span::addNumber(int number)
 
 void Span::addMultipleNumbers(int start, int stop)
 {
+	int	step;
+
+	if (start < stop)
+		step = 1;
+	else
+		step = -1;
 	while (start != stop)
 	{
 		addNumber(start);
-		start++;
+		start += step;
 	}
 }
 
