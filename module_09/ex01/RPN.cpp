@@ -30,7 +30,7 @@ int	RPN::calculate(const std::string& expression)
 		if (i % 2 == 0 && isdigit(expression[i]))
 			_operations.push(expression[i] - '0');
 		else if (i % 2 == 0 && _isOperator(expression[i]))
-			_operations.push(_calculate_operator(expression[i]));
+			_operations.push(_calculateOperator(expression[i]));
 		else if (expression[i] != ' '
 				 || (expression[i] == ' ' && i == expression.length() - 1))
 			throw (ExpressionException());
@@ -42,7 +42,7 @@ int	RPN::calculate(const std::string& expression)
 	return (result);
 }
 
-int	RPN::_calculate_operator(const char c_operator)
+int	RPN::_calculateOperator(const char c_operator)
 {
 	int a;
 	int	b;

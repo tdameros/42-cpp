@@ -25,7 +25,7 @@ public:
 private:
 	std::stack<int>	_operations;
 
-	int			_calculate_operator(const char c_operator);
+	int			_calculateOperator(const char c_operator);
 	static bool	_isOperator(const char c);
 };
 
