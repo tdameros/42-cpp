@@ -1,20 +1,23 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(void)
-{
 
-}
+static inline std::string &trim(std::string &s);
+static inline std::string &ltrim(std::string &s);
+static inline std::string &rtrim(std::string &s);
+
+BitcoinExchange::BitcoinExchange(void) { }
 
 BitcoinExchange::BitcoinExchange(const std::string& inputFile)
 {
 	std::ifstream	dataBaseFile(inputFile.c_str());
 
 	if (!dataBaseFile.is_open())
-		throw (std::exception());
+		throw (OpenDatabaseException());
 	_fillDataBase(dataBaseFile);
 }
 
@@ -23,15 +26,13 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 	*this = other;
 }
 
-BitcoinExchange::~BitcoinExchange(void)
-{
-
-}
+BitcoinExchange::~BitcoinExchange(void) { }
 
 BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other)
 {
 	if (this != &other)
 	{
+		_dataBase = other._dataBase;
 	}
 	return (*this);
 }
@@ -42,7 +43,7 @@ void	BitcoinExchange::convert(const std::string& inputFile)
 	std::string		line;
 
 	if (!file.is_open())
-		throw (std::exception());
+		throw (OpenInputFileException());
 	getline(file, line);
 	while (getline(file, line))
 	{
@@ -61,17 +62,19 @@ void	BitcoinExchange::_convertLine(const std::string& line)
 {
 	std::string		date;
 	std::string		str_amount;
-	size_t 			pipe_index;
+	size_t 			separator_index;
 	char 			*endptr;
 	double 			amount;
 
-	pipe_index = line.find("|");
-	if (pipe_index == std::string::npos)
+	separator_index = line.find("|");
+	if (separator_index == std::string::npos)
 		throw (SeparatorNotFound());
-	date = line.substr(0, pipe_index);
+	date = line.substr(0, separator_index);
+	date = trim(date);
 	if (!_isValidDate(date))
 		throw (InvalidDate());
-	str_amount = line.substr(pipe_index + 1, line.length() - date.length());
+	str_amount = line.substr(separator_index + 1, line.length() - date.length());
+	str_amount = trim(str_amount);
 	if (str_amount.length() == 0)
 		throw (AmountNotFound());
 	amount = strtod(str_amount.c_str(), &endptr);
@@ -91,32 +94,30 @@ void	BitcoinExchange::_fillDataBase(std::ifstream& dataBaseFile)
 		_parseDataBaseLine(line);
 	}
 	if (_dataBase.size() == 0)
-		throw EmptyDataBaseException();
+		throw EmptyDatabaseException();
 }
 
 void	BitcoinExchange::_parseDataBaseLine(const std::string& line)
 {
-	size_t 		comma_index;
+	size_t 		separator_index;
 	std::string date;
 	std::string str_price;
 	double		price;
 	char		*endptr;
 
 
-	comma_index = line.find(",");
-	if (comma_index == std::string::npos)
+	separator_index = line.find(",");
+	if (separator_index == std::string::npos)
 		return;
-	date = line.substr(0, comma_index);
-	str_price = line.substr(comma_index + 1, line.length() - date.length());
+	date = line.substr(0, separator_index);
+	date = trim(date);
+	str_price = line.substr(separator_index + 1, line.length() - date.length());
+	str_price = trim(str_price);
 	if (str_price.length() == 0)
 		return;
 	price = strtod(str_price.c_str(), &endptr);
 	if (errno == ERANGE || *endptr != '\0')
-	{
 		return;
-	}
-//	std::cout << "Date: " << date << std::endl;
-//	std::cout << "Price: " << price << std::endl;
 	_dataBase.insert(std::make_pair(date, price));
 }
 
@@ -172,3 +173,23 @@ bool	BitcoinExchange::_isLeap(const unsigned int year)
 {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
+
+static inline std::string &trim(std::string &s)
+{
+	return (ltrim(rtrim(s)));
+}
+
+static inline std::string &ltrim(std::string &s)
+{
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+									std::not1(std::ptr_fun<int, int>(std::isspace))));
+	return (s);
+}
+
+static inline std::string &rtrim(std::string &s)
+{
+	s.erase(std::find_if(s.rbegin(), s.rend(),
+						 std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+	return (s);
+}
+

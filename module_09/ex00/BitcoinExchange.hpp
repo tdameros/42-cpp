@@ -34,34 +34,46 @@ public:
 
 	void	convert(const std::string& inputFile);
 
-	class EmptyDataBaseException : public std::exception
+	class OpenDatabaseException : public std::exception
 	{
 	public:
-		const char* what() const throw() { return ("Empty Database"); };
+		const char* what() const throw() { return ("Error: failed to open the database"); };
+	};
+
+	class EmptyDatabaseException : public std::exception
+	{
+	public:
+		const char* what() const throw() { return ("Error: empty database"); };
+	};
+
+	class OpenInputFileException : public std::exception
+	{
+	public:
+		const char* what() const throw() { return ("Error: failed to open the input file"); };
 	};
 
 	class SeparatorNotFound : public std::exception
 	{
 	public:
-		const char* what() const throw() { return ("Separator not found"); };
+		const char* what() const throw() { return ("Error: separator not found"); };
 	};
 
 	class InvalidDate: public std::exception
 	{
 	public:
-		const char* what() const throw() { return ("Invalid date"); };
+		const char* what() const throw() { return ("Error: invalid date"); };
 	};
 
 	class AmountNotFound: public std::exception
 	{
 	public:
-		const char* what() const throw() { return ("Amount not found"); };
+		const char* what() const throw() { return ("Error: amount not found"); };
 	};
 
 	class AmountInvalidRange: public std::exception
 	{
 	public:
-		const char* what() const throw() { return ("Amount invalid range (0 - 1000)"); };
+		const char* what() const throw() { return ("Error: amount invalid range (0:1000)"); };
 	};
 
 private:
