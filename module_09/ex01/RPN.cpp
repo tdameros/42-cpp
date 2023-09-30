@@ -60,7 +60,11 @@ int	RPN::_calculate_operator(const char c_operator)
 	else if (c_operator == '-')
 		return (a - b);
 	else if (c_operator == '/')
+	{
+		if (b == 0)
+			throw (std::runtime_error("Error: division by zero"));
 		return (a / b);
+	}
 	else if (c_operator == '*')
 		return (a * b);
 	return (a);
