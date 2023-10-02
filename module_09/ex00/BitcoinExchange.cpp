@@ -111,6 +111,8 @@ void	BitcoinExchange::_parseDataBaseLine(const std::string& line)
 		return;
 	date = line.substr(0, separator_index);
 	date = trim(date);
+	if (!_isValidDate(date))
+		return;
 	str_price = line.substr(separator_index + 1, line.length() - date.length());
 	str_price = trim(str_price);
 	if (str_price.length() == 0)
