@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "RPN.hpp"
 
 RPN::RPN(void) { }
