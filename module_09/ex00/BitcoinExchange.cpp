@@ -81,6 +81,8 @@ void	BitcoinExchange::_convertLine(const std::string& line)
 	if (errno == ERANGE || *endptr != '\0' || amount < 0 || amount > 1000)
 		throw (AmountInvalidRange());
 	std::map<std::string, double>::iterator it = _dataBase.lower_bound(date);
+	if (it != _dataBase.begin())
+		it--;
 	std::cout << date << " => " << amount << " = " << amount * it->second << std::endl;
 }
 
